@@ -1,4 +1,4 @@
-package com.app.currency;
+package com.app.posts.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +8,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.posts.posts.Post;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
 
-    private List<Post> listOfPost = new ArrayList();
-
+    private List<Post> listOfPost = new ArrayList<>();
 
     @NonNull
     @Override
@@ -23,7 +24,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         view = LayoutInflater.from(parent.getContext())
                 .inflate(android.R.layout.simple_list_item_1, parent, false);
         return new ViewHolder(view);
-
     }
 
     @Override
@@ -37,14 +37,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return listOfPost.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(android.R.id.text1);
         }
-
     }
 
     public void setData(List<Post> data) {

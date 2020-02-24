@@ -1,14 +1,13 @@
-package com.app.currency;
+package com.app.posts.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitSingleton {
-    static String BASE_URL = "https://jsonplaceholder.typicode.com/";
-    static Retrofit.Builder retrofit = null;
+    private final static String BASE_URL = "https://jsonplaceholder.typicode.com/";
+    private static Retrofit.Builder retrofit = null;
 
-    private RetrofitSingleton() {
-    }
+    private RetrofitSingleton() {}
 
     public static Retrofit.Builder getInstance() {
         if (retrofit == null) {
@@ -16,7 +15,6 @@ public class RetrofitSingleton {
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
         }
-
         return retrofit;
     }
 }

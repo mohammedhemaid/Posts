@@ -1,4 +1,4 @@
-package com.app.currency;
+package com.app.posts.posts;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.app.posts.R;
+import com.app.posts.adapter.RecycleViewAdapter;
+import com.app.posts.addpost.AddPostActivity;
+import com.app.posts.init.App;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,8 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
-    final static int REQUIEST_CODE = 101;
+    final static int REQUEST_ADD_POST = 101;
     RecycleViewAdapter adapter;
     RecyclerView recyclerView;
 
@@ -24,19 +28,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        adapter = new RecycleViewAdapter();
-        recyclerView = findViewById(R.id.recycleView);
-        recyclerView.setAdapter(adapter);
+        initRecycleView();
         getAllPost();
 
 
-        findViewById(R.id.add_post).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, AddPostActivity.class);
-                startActivityForResult(i, REQUIEST_CODE);
-            }
+        findViewById(R.id.add_post).setOnClickListener((View v) -> {
+            Intent i = new Intent(MainActivity.this, AddPostActivity.class);
+            startActivityForResult(i, REQUEST_ADD_POST);
         });
+    }
+
+    private void initRecycleView() {
+        adapter = new RecycleViewAdapter();
+        recyclerView = findViewById(R.id.recycleView);
+        recyclerView.setAdapter(adapter);
     }
 
     private void getAllPost() {
@@ -45,25 +50,20 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 List<Post> listOfPosts = response.body();
                 adapter.setData(listOfPosts);
-
             }
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-
-            }
+            public void onFailure(Call<List<Post>> call, Throwable t) {}
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case REQUIEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    getAllPost();
-                }
+        if (requestCode == REQUEST_ADD_POST) {
+            if (resultCode == RESULT_OK) {
+                getAllPost();
+            }
         }
     }
 }

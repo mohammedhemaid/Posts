@@ -1,4 +1,4 @@
-package com.app.currency;
+package com.app.posts.posts;
 
 import androidx.annotation.NonNull;
 

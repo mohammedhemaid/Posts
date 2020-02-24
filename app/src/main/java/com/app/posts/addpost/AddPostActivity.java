@@ -1,14 +1,15 @@
-package com.app.currency;
+package com.app.posts.addpost;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.app.posts.init.App;
+import com.app.posts.posts.Post;
+import com.app.posts.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,19 +17,19 @@ import retrofit2.Response;
 
 public class AddPostActivity extends AppCompatActivity {
     EditText titleEditText;
-    EditText descrptionEditText;
+    EditText descriptionEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_post);
         titleEditText = findViewById(R.id.editText);
-        descrptionEditText = findViewById(R.id.editText2);
+        descriptionEditText = findViewById(R.id.editText2);
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postOnApi(titleEditText.getText().toString(), descrptionEditText.getText().toString());
+                postOnApi(titleEditText.getText().toString(), descriptionEditText.getText().toString());
             }
         });
     }
@@ -52,8 +53,5 @@ public class AddPostActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
-
 }

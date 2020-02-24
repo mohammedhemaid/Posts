@@ -1,4 +1,6 @@
-package com.app.currency;
+package com.app.posts.api;
+
+import com.app.posts.posts.Post;
 
 import java.util.List;
 

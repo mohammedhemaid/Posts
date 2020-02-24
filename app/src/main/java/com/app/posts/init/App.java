@@ -1,9 +1,13 @@
-package com.app.currency;
+package com.app.posts.init;
 
 import android.app.Application;
 
+import com.app.posts.api.ApiRequest;
+import com.app.posts.api.RetrofitSingleton;
+
 public class App extends Application {
-   static ApiRequest apiRequest;
+
+   public static ApiRequest apiRequest;
 
     @Override
     public void onCreate() {
